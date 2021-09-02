@@ -1,0 +1,5 @@
+to contarinize the react app run the following cmd
+
+1) goes to client directory
+2) docker build -f Dockerfile.dev .
+3) docker run <imageId or containerId>
