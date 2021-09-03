@@ -1,0 +1,25 @@
+language: generic 
+
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t tahakhan/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true tahakhan/react-test npm test -- --coverage 
+
+after_success:
+  - docker build -t tahakhan/multi-client ./client
+  - docker build -t tahakhan/multi-nginx ./nginx
+  - docker build -t tahakhan/multi-server ./server
+  - docker build -t tahakhan/multi-worker ./worker
+
+  # Log in to the docker CLI
+  - echo  "$DOCKER_PASSWORD" | docker login -u  "$DOCKER_ID"  --password-stdin
+  # Take those images and push them to docker hub
+  - docker push tahakhan/multi-client
+  - docker push tahakhan/multi-nginx
+  - docker push tahakhan/multi-server
+  - docker push tahakhan/multi-worker  
