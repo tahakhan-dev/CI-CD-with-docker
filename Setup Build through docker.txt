@@ -1,0 +1,34 @@
+==============================================
+		Our Single Container Setup Flow
+==============================================
+
+1)	Push code to github
+2)	Travis automatically pull repo
+3)	Travis builds an image, tests code
+4)	Travis pushes code to AWS EB
+5)	EB builds image, deploys it
+
+
+================================================
+		Multi Container Setup Flow
+================================================
+
+1)	Push code to github
+2)	Travis automatically pulls repo
+3)	Travis builds a test image, test code
+4)	Travis builds prod image
+6)	Travis pushes built prod images to Docker Hub
+7)	Travis pushes project to AWS EB
+8)	EB pulls images from Docker Hub, deploys
+
+
+==================================================
+					Travis Flow					
+==================================================
+
+1)	Specify docker as a dependency
+2)	Build test version of React Project	---| We only have tests for the react project,
+3)	Run tests							---| we could easily add tests for server and worker
+4)	Build prod versions of all projects
+5)	Push all to docker hub
+6)	Tell Elastic Beanstalk to update
