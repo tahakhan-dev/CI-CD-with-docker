@@ -23,12 +23,12 @@ after_success:
   - wget -qO- https://toolbelt.heroku.com/install.sh | sh #installed heroku CLI
   - heroku plugins:install @heroku-cli/plugin-container-registry
   - docker login -u "mtahakhan" --password=$(heroku auth:token) registry.heroku.com #logged in
-  - heroku container:push web --app vast-meadow-20080
-  - heroku container:release web --app vast-meadow-20080
+  - heroku container:push web --app docker-fibserires
+  - heroku container:release web --app docker-fibserires
 
-deploy:
-  skip_cleanup: true
-  provider: heroku
-  api_key: "$HEROKU_API_KEY"
-  on:
-    all_branches: true
+# deploy:
+#   skip_cleanup: true
+#   provider: heroku
+#   api_key: "$HEROKU_API_KEY"
+#   on:
+#     all_branches: true
