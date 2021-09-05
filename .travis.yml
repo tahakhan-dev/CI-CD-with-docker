@@ -1,15 +1,10 @@
-language: node_js
-node_js:
-  - 14
 sudo: required
 services:
   - docker
+language: node_js
 
 before_install:
   - docker build -t mtahakhan/react-test -f ./client/Dockerfile.dev ./client
-  - wget -qO- https://toolbelt.heroku.com/install.sh | sh #installed heroku CLI
-  - docker login -u "mtahakhan.dev" --password=$(heroku auth:token) registry.heroku.com #logged in
-
 script:
   - docker run mtahakhan/react-test npm test -- --coverage
 
@@ -25,12 +20,15 @@ after_success:
   - docker push mtahakhan/multi-nginx
   - docker push mtahakhan/multi-server
   - docker push mtahakhan/multi-worker
+  - wget -qO- https://toolbelt.heroku.com/install.sh | sh #installed heroku CLI
+  - heroku plugins:install @heroku-cli/plugin-container-registry
+  - docker login -u "mtahakhan" --password=$(heroku auth:token) registry.heroku.com #logged in
+  - heroku container:push web --app vast-meadow-20080
+  - heroku container:release web --app vast-meadow-20080
 
 deploy:
   skip_cleanup: true
-  provider: script
-  script: 
-    heroku container:release web --app docker-fibserires
+  provider: heroku
   api_key: "$HEROKU_API_KEY"
   on:
     all_branches: true
