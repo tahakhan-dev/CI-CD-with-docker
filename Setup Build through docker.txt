@@ -17,9 +17,9 @@
 2)	Travis automatically pulls repo
 3)	Travis builds a test image, test code
 4)	Travis builds prod image
-6)	Travis pushes built prod images to Docker Hub
-7)	Travis pushes project to AWS EB
-8)	EB pulls images from Docker Hub, deploys
+5)	Travis pushes built prod images to Docker Hub
+6)	Travis pushes project to AWS EB
+7)	EB pulls images from Docker Hub, deploys
 
 
 ==================================================
@@ -32,3 +32,32 @@
 4)	Build prod versions of all projects
 5)	Push all to docker hub
 6)	Tell Elastic Beanstalk to update
+
+
+==================================================
+				AWS Elastic Cache
+==================================================
+
+1)	Automatically creates and maintains Redis instances for you
+2)	Super easy to scale
+3)	Built in logging + maintenance
+4)	Probably better security than what we can do
+5)	Easier to migrate off of EB with
+
+==================================================
+		AWS Relational Database Service
+==================================================
+
+1)	Automatically creates and maintains Postgres instances for you
+2)	Super easy to scale
+3)	Built in logging + maintenance
+4)	Probably better security than what we can do
+5)	Automated backups and rollbacks
+6)	Easier to migrate off of EB with
+
+
+===============================================================
+					Having sai all that
+===============================================================
+*)	You migh still want to know how to get your own DB running in a container in prod
+*)	Our next project will use Redis + Postgres in containers
