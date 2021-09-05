@@ -27,7 +27,7 @@ deploy:
   skip_cleanup: true
   provider: heroku
   api_key: "$HEROKU_API_KEY"
-  deployment: "docker-fibserires"
+  deployment: "tahakhan-dev/FibanioSeriesDocker"
   # provider: script
   # script: 
   #   heroku container:release web --app docker-fibserires
