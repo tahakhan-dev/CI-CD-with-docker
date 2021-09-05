@@ -4,6 +4,8 @@ services:
 
 before_install:
   - docker build -t mtahakhan/react-test -f ./client/Dockerfile.dev ./client
+  - wget -qO- https://toolbelt.heroku.com/install.sh | sh #installed heroku CLI
+  - docker login -u "mtahakhan.dev" --password=$(heroku auth:token) registry.heroku.com #logged in
 
 script:
   - docker run mtahakhan/react-test npm test -- --coverage
@@ -22,8 +24,8 @@ after_success:
   - docker push mtahakhan/multi-worker
 
 deploy:
-  provider: heroku
-  api_key:
-    secure:"$HEROKU_API_KEY"
+  provider: script
+  script: 
+    heroku container:release web --app docker-fibserires
   on:
     all_branches: true
