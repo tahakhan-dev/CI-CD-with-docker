@@ -24,8 +24,12 @@ after_success:
   - docker push mtahakhan/multi-worker
 
 deploy:
-  provider: script
-  script: 
-    heroku container:release web --app docker-fibserires
+  skip_cleanup: true
+  provider: heroku
+  api_key: "$HEROKU_API_KEY"
+  deployment: "docker-fibserires"
+  # provider: script
+  # script: 
+  #   heroku container:release web --app docker-fibserires
   on:
     all_branches: true
